@@ -1,0 +1,33 @@
+plugins {
+  id "org.sonarqube" version "2.6"
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "jacoco"
+
+repositories {
+    jcenter()  
+}
+
+jar {
+    manifest {
+       attributes ('Main-Class': 'zoo.Main')
+    }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'         
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+sourceSets.main.java.srcDirs = ['src']
+mainClassName = 'zoo.Main'
+
